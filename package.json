@@ -8,6 +8,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
+    "ai-start": "node --loader ts-node/esm -r dotenv/config open-ai/index.ts",
     "build": "tsc",
     "server": "NODE_ENV=development node dist/server/app.js",
     "dev": "concurrently \"tsc --watch\" \"nodemon dist/server/app.js\"",
@@ -63,6 +64,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "express": "^4.21.0",
+    "openai": "^4.67.3",
     "prettier": "^3.3.3"
   }
 }
