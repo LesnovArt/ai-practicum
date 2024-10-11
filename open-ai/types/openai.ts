@@ -1,4 +1,5 @@
 import OpenAI from 'openai';
+import { ChatCompletionMessage } from 'openai/resources/index.js';
 
 export type NonStreamAIPayload =
   OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming;
@@ -16,3 +17,5 @@ export enum AIRoles {
 }
 
 export type AIRolesTypes = `${AIRoles}`;
+
+export type ResultCompletionMsg = ChatCompletionMessage;

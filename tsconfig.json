@@ -12,6 +12,6 @@
     "emitDecoratorMetadata": true,
     "esModuleInterop": true
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*.ts", "open-ai/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
