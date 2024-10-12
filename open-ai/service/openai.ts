@@ -18,10 +18,11 @@ export class OpenAIClient {
   }
 
   public async createChatCompletion(body: CreateChatCompletionProps) {
-    const { model = OpenAIModels['gpt-4o-mini'], messages } = body;
+    const { model = OpenAIModels['gpt-4o-mini'], messages, ...rest } = body;
     const completion = await this.openai.chat.completions.create({
       model,
       messages,
+      ...rest,
     });
     return completion.choices[0].message;
   }

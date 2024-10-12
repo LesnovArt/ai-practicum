@@ -1,22 +1,57 @@
 import { OpenAIClient } from '../service/index.js';
-import { AIMessages, ResultCompletionMsg } from '../types/index.js';
+import {
+  CreateChatCompletionProps,
+  ResultCompletionMsg,
+} from '../types/index.js';
 import { errorHandler } from './error-handler.js';
 
 const AI = OpenAIClient.getInstance();
 
-export type CompletionsRunnerProps = {
-  messages: AIMessages;
+export type CompletionsRunnerProps = CreateChatCompletionProps & {
   onSuccess?: (response: ResultCompletionMsg) => void | ResultCompletionMsg;
   onFailure?: (error: string) => string | void;
 };
 
 export const runCompletion = async ({
   messages,
+  /**
+   * suggest popular destinations
+   */
+  temperature,
+  /**
+   * output is more focused
+   */
+  top_p,
+  /**
+   * limit on response length in tokens
+   */
+  max_tokens = 70,
+  /**
+   * number of completions generated per prompt
+   */
+  n = 1,
+  /**
+   * Discourages repetition in the model’s outputs
+   */
+  frequency_penalty,
+  /**
+   * stands to keep results equal
+   */
+  seed,
   onSuccess,
   onFailure,
 }: CompletionsRunnerProps): Promise<ResultCompletionMsg | undefined> => {
   console.log('--/-- Start Prompt execution... --/--');
-  const response = await AI.createChatCompletion({ messages });
+
+  const response = await AI.createChatCompletion({
+    messages,
+    temperature,
+    top_p,
+    max_tokens,
+    n,
+    frequency_penalty,
+    seed,
+  });
 
   try {
     if (!response) {
