@@ -1,16 +1,9 @@
 import { OpenAIClient } from '../service/index.js';
-import {
-  CreateChatCompletionProps,
-  ResultCompletionMsg,
-} from '../types/index.js';
+import { CompletionsRunnerProps } from '../types/handlers.js';
+import { ResultCompletionMsg } from '../types/index.js';
 import { errorHandler } from './error-handler.js';
 
 const AI = OpenAIClient.getInstance();
-
-export type CompletionsRunnerProps = CreateChatCompletionProps & {
-  onSuccess?: (response: ResultCompletionMsg) => void | ResultCompletionMsg;
-  onFailure?: (error: string) => string | void;
-};
 
 export const runCompletion = async ({
   messages,
@@ -38,8 +31,6 @@ export const runCompletion = async ({
    * stands to keep results equal
    */
   seed,
-  onSuccess,
-  onFailure,
 }: CompletionsRunnerProps): Promise<ResultCompletionMsg | undefined> => {
   console.log('--/-- Start Prompt execution... --/--');
 
@@ -66,11 +57,9 @@ export const runCompletion = async ({
     }
 
     console.log(response);
-    onSuccess?.(response);
-
     return response;
   } catch (error: unknown) {
-    errorHandler(error, onFailure);
+    errorHandler(error);
   } finally {
     console.log('--/--Prompt finished execution --/--');
   }

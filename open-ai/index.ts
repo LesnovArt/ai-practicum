@@ -1,8 +1,10 @@
-import {
-  // fixBackPain,
-  // roleBasedBackPainAdvice,
-  requestWithParams,
-} from './simple-completions/index.js';
+// import {
+// fixBackPain,
+// roleBasedBackPainAdvice,
+// requestWithParams,
+// } from './simple-completions/index.js';
+
+import { makeChatWithOutContext } from './chats/index.js';
 
 console.log('Hello world from OpenAI course!');
 // TASk 1
@@ -17,8 +19,19 @@ console.log('Hello world from OpenAI course!');
 // });
 
 // TASK 3 - change parameter to check other cases
-requestWithParams('highTopP').then(({ key, parameters }) => {
-  console.log(
-    `Parameter [${key}] with PARAMETERS: [${JSON.stringify(parameters)}] request SUCCEEDED !!!`
-  );
+// requestWithParams('highTopP').then(({ key, parameters }) => {
+//   console.log(
+//     `Parameter [${key}] with PARAMETERS: [${JSON.stringify(parameters)}] request SUCCEEDED !!!`
+//   );
+// });
+
+// Task 4
+makeChatWithOutContext().then(async ({ chat, aiResponse, error }) => {
+  if (!error && !!aiResponse) {
+    console.log('aiResponse', aiResponse.content);
+  } else {
+    console.error('Smth went wrong!!!');
+  }
+
+  chat.close();
 });

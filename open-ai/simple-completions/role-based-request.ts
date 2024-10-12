@@ -16,9 +16,9 @@ const messages: AIMessages = [
   },
 ];
 
-const handleSuccess = (response: ResultCompletionMsg) => {
+const handleSuccess = (response?: ResultCompletionMsg) => {
   console.log(
-    `Here can be some code on success processing...! ROLE: ${response.role}`
+    `Here can be some code on success processing...! ROLE: ${response?.role}`
   );
 };
 
@@ -29,9 +29,9 @@ const handleFailure = (errorMsg: string) => {
 };
 
 export const roleBasedBackPainAdvice = async () => {
-  await runCompletion({
+  runCompletion({
     messages,
-    onSuccess: handleSuccess,
-    onFailure: handleFailure,
-  });
+  })
+    .then(handleSuccess)
+    .catch(handleFailure);
 };
