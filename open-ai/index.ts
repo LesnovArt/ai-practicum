@@ -4,7 +4,10 @@
 // requestWithParams,
 // } from './simple-completions/index.js';
 
-import { makeChatWithOutContext } from './chats/index.js';
+import {
+  // makeChatWithOutContext,
+  startComplexChat,
+} from './chats/index.js';
 
 console.log('Hello world from OpenAI course!');
 // TASk 1
@@ -26,12 +29,15 @@ console.log('Hello world from OpenAI course!');
 // });
 
 // Task 4
-makeChatWithOutContext().then(async ({ chat, aiResponse, error }) => {
-  if (!error && !!aiResponse) {
-    console.log('aiResponse', aiResponse.content);
-  } else {
-    console.error('Smth went wrong!!!');
-  }
+// makeChatWithOutContext().then(async ({ chat, aiResponse, error }) => {
+//   if (!error && !!aiResponse) {
+//     console.log('aiResponse', aiResponse.content);
+//   } else {
+//     console.error('Smth went wrong!!!');
+//   }
 
-  chat.close();
-});
+//   chat.close();
+// });
+
+// Task 5
+startComplexChat();

@@ -1,5 +1,5 @@
 import { ReadLineOptions } from 'readline';
-import { ChatBot } from '../service/index.js';
+import { ChatBot, ReadlineInterface } from '../service/index.js';
 
 const initialOptions = {
   input: process.stdin,
@@ -16,7 +16,8 @@ const completionsOptions = {
 export const makeChatWithOutContext = async (
   chatOptions: ReadLineOptions = initialOptions
 ) => {
-  const chat = new ChatBot(chatOptions);
+  const inputOutput = new ReadlineInterface(chatOptions);
+  const chat = new ChatBot(inputOutput);
 
   try {
     const passedQuestion = await chat.askQuestion('Ask question: ');

@@ -32,7 +32,8 @@ export const runCompletion = async ({
    */
   seed,
 }: CompletionsRunnerProps): Promise<ResultCompletionMsg | undefined> => {
-  console.log('--/-- Start Prompt execution... --/--');
+  // TODO add log levels and leave it for debug mode
+  // console.log('--/-- Start Prompt execution... --/--');
 
   const response = await AI.createChatCompletion({
     messages,
@@ -56,11 +57,11 @@ export const runCompletion = async ({
       };
     }
 
-    console.log(response);
     return response;
   } catch (error: unknown) {
     errorHandler(error);
   } finally {
-    console.log('--/--Prompt finished execution --/--');
+    // TODO add log levels and leave it for debug mode
+    // console.log('--/--Prompt finished execution --/--');
   }
 };

@@ -1,6 +1,6 @@
 import { CreateChatCompletionProps } from './openai.js';
 
 export type SendQuestionToAIProps = {
-  question: string;
+  question?: string;
   completionsOptions?: Partial<CreateChatCompletionProps>;
 };
