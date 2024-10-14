@@ -1,6 +1,9 @@
 import { OpenAI } from 'openai';
 import { OpenAIModels } from './models.js';
-import { CreateChatCompletionProps } from '../types/index.js';
+import {
+  CreateChatCompletionProps,
+  CreateDalleImageProps,
+} from '../types/index.js';
 
 export class OpenAIClient {
   private static instance: OpenAIClient;
@@ -25,5 +28,27 @@ export class OpenAIClient {
       ...rest,
     });
     return completion.choices[0].message;
+  }
+
+  public async createDalleImage(body: CreateDalleImageProps) {
+    const {
+      model = OpenAIModels['dall-e-2'],
+      prompt,
+      size = '256x256',
+      quality = 'standard',
+      n = 1,
+      response_format = 'url',
+    } = body;
+
+    const response = await this.openai.images.generate({
+      model,
+      prompt,
+      size,
+      quality,
+      n,
+      response_format,
+    });
+
+    return response.data[0].url;
   }
 }

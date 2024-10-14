@@ -4,10 +4,11 @@
 // requestWithParams,
 // } from './simple-completions/index.js';
 
-import {
-  // makeChatWithOutContext,
-  startComplexChat,
-} from './chats/index.js';
+// import {
+// makeChatWithOutContext,
+// startComplexChat,
+// } from './chats/index.js';
+import { createCityScape } from './image-creation/index.js';
 
 console.log('Hello world from OpenAI course!');
 // TASk 1
@@ -40,4 +41,9 @@ console.log('Hello world from OpenAI course!');
 // });
 
 // Task 5
-startComplexChat();
+// startComplexChat();
+
+// Task 6
+createCityScape().then((url) => {
+  console.log('Image Url', url);
+});

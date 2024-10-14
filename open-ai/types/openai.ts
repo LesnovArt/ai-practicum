@@ -11,6 +11,12 @@ export type CreateChatCompletionProps = Omit<NonStreamAIPayload, 'model'> & {
   model?: NonStreamAIPayload['model'];
 };
 
+export type DalleImageParams = OpenAI.Images.ImageGenerateParams;
+
+export type CreateDalleImageProps = Omit<DalleImageParams, 'model'> & {
+  model?: NonStreamAIPayload['model'];
+};
+
 export type AIMessage = ChatCompletionMessageParam;
 export type AIMessages = NonStreamAIPayload['messages'];
 
