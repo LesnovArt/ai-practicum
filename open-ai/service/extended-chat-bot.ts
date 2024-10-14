@@ -5,9 +5,8 @@ import {
   ResultCompletionMsg,
   SendQuestionToAIProps,
   AIRoles,
+  ChatBotConstructor,
 } from '../types/index.js';
-import { runCompletion } from '../handlers/index.js';
-import { InputOutputInterface } from './input-output/index.js';
 import { ChatBot } from './base-chat-bot.js';
 
 type SupportedEvents = 'onAsk' | 'onAISent' | 'onAIAnswer' | 'chatClosed';
@@ -15,8 +14,8 @@ type SupportedEvents = 'onAsk' | 'onAISent' | 'onAIAnswer' | 'chatClosed';
 export class ExtendedChatBot extends ChatBot {
   private eventEmitter: EventEmitter;
 
-  constructor(inputOutput: InputOutputInterface) {
-    super(inputOutput);
+  constructor(props: ChatBotConstructor) {
+    super(props);
     this.eventEmitter = new EventEmitter();
   }
 
@@ -49,7 +48,13 @@ export class ExtendedChatBot extends ChatBot {
      * occurs before sending to AI completions
      */
     this.eventEmitter.emit('onAISent', body);
-    const response = await runCompletion(body);
+    this.updateTokenUsage(body.messages);
+    const response = await super.sendQuestionToAI({ completionsOptions: body });
+
+    if (response?.content) {
+      const aiMsg = this.buildMessage(AIRoles.assistant, response.content);
+      this.updateTokenUsage([aiMsg]);
+    }
     /**
      * occurs after receiving from AI completions
      */
