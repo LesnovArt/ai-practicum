@@ -3,6 +3,8 @@ import { OpenAIModels } from './models.js';
 import {
   CreateChatCompletionProps,
   CreateDalleImageProps,
+  EmbeddingCreateProps,
+  EmbeddingResult,
   STTCreateProps,
   TTSCreateProps,
 } from '../types/index.js';
@@ -79,5 +81,24 @@ export class OpenAIClient {
     })) as unknown as { text: string };
 
     return transcription.text;
+  }
+
+  public async getVector(
+    props: EmbeddingCreateProps
+  ): Promise<EmbeddingResult> {
+    const {
+      model = 'text-embedding-3-small',
+      encoding_format = 'float',
+      dimensions = 768,
+    } = props;
+
+    const vector = await this.openai.embeddings.create({
+      model,
+      encoding_format,
+      dimensions,
+      ...props,
+    });
+
+    return { data: vector.data[0], usage: vector.usage };
   }
 }

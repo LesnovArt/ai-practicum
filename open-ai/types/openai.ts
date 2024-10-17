@@ -35,6 +35,19 @@ export type STTCreateProps = Omit<STTCreateParams, 'model'> & {
   model?: STTCreateParams['model'];
 };
 
+export type EmbeddingCreateParams = OpenAI.Embeddings.EmbeddingCreateParams;
+export type EmbeddingCreateProps = Omit<EmbeddingCreateParams, 'model'> & {
+  model?: EmbeddingCreateParams['model'];
+};
+
+export type EmbeddingData = OpenAI.Embeddings.Embedding;
+export type EmbeddingUsage = OpenAI.Embeddings.CreateEmbeddingResponse.Usage;
+
+export type EmbeddingResult = {
+  data: EmbeddingData;
+  usage: EmbeddingUsage;
+};
+
 export type AIMessage = ChatCompletionMessageParam;
 export type AIMessages = NonStreamAIPayload['messages'];
 
