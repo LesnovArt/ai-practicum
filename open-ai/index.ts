@@ -5,9 +5,10 @@
 // } from './simple-completions/index.js';
 
 import {
+  queryByVector,
   // makeEmbedding,
   // makeIndex,
-  upsertEmbeddingsByNamespace,
+  // upsertEmbeddingsByNamespace,
 } from './embedding/index.js';
 
 // import { testConnection } from './pinecone/index.js';
@@ -82,10 +83,19 @@ console.log('Hello world from OpenAI course!');
 //   });
 
 // Task 3
-upsertEmbeddingsByNamespace()
+// upsertEmbeddingsByNamespace()
+//   .then(() => {
+//     console.log('Data upsert completed successfully!');
+//   })
+//   .catch((error: unknown) => {
+//     console.error('Error upserting data:', error);
+//   });
+
+// Task 4
+queryByVector()
   .then(() => {
-    console.log('Data upsert completed successfully!');
+    console.log('Data queried successfully!');
   })
   .catch((error: unknown) => {
-    console.error('Error upserting data:', error);
+    console.error('Error querying data:', error);
   });
