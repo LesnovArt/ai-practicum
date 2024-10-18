@@ -31,7 +31,7 @@ export const queryIndexByVector = async (props: QueryByVectorValuesProps) => {
   const embManager = EmbeddingManager.getInstance();
 
   try {
-    await embManager.querySimilar(props);
+    return embManager.querySimilar(props);
   } catch (error) {
     console.log('Error in queryIndexByVector');
     errorHandler(error);
