@@ -2,16 +2,17 @@ import {
   CreateIndexOptions,
   IndexModel,
   Pinecone,
-  PineconeRecord,
-  QueryByRecordId,
-  QueryByVectorValues,
-  QueryResponse,
-  RecordMetadata,
 } from '@pinecone-database/pinecone';
 import {
   CreateIndexSpec,
   IndexName,
 } from '@pinecone-database/pinecone/dist/control';
+import {
+  QueryByIdProps,
+  QueryByVectorValuesProps,
+  QueryRequestResult,
+  UpsertProps,
+} from '../../types/index.js';
 
 export class EmbeddingManager {
   private static instance: EmbeddingManager;
@@ -78,19 +79,17 @@ export class EmbeddingManager {
   async upsertEmbedding({
     indexName,
     upsertPayload,
-  }: {
-    indexName: string;
-    upsertPayload: PineconeRecord<RecordMetadata>[];
-  }): Promise<void> {
+    namespaceName,
+  }: UpsertProps): Promise<void> {
     const index = this.pcone.Index(indexName);
+    if (namespaceName) {
+      return index.namespace(namespaceName).upsert(upsertPayload);
+    }
+
     return index.upsert(upsertPayload);
   }
 
-  async queryById(
-    props: QueryByRecordId & {
-      indexName: string;
-    }
-  ): Promise<QueryResponse<RecordMetadata>> {
+  async queryById(props: QueryByIdProps): QueryRequestResult {
     const {
       indexName,
       id,
@@ -110,11 +109,7 @@ export class EmbeddingManager {
     });
   }
 
-  async querySimilar(
-    props: QueryByVectorValues & {
-      indexName: string;
-    }
-  ): Promise<QueryResponse<RecordMetadata>> {
+  async querySimilar(props: QueryByVectorValuesProps): QueryRequestResult {
     const {
       indexName,
       vector,
