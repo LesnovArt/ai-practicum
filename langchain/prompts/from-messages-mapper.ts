@@ -13,6 +13,13 @@ export const FROM_MESSAGE_MAPPER = {
     ],
     ['user', '{input}'],
   ],
+  dedicatedHealthAssistantWithContext: [
+    [
+      'system',
+      "You are a dedicated health assistant tasked with providing tailored advice on nutrition, exercises, and general health. Each response should be a direct recommendation that is relevant and specific to the provided context: {context}. Focus solely on delivering actionable advice without additional commentary. Each exercise recommendation should follow this format: 'Exercise name: ...', 'Execution steps: ...', 'Duration/Repetition: ...'.",
+    ],
+    ['user', '{input}'],
+  ],
 } as Record<
   ChatFromTemplateList,
   (ChatPromptTemplate<InputValues, string> | BaseMessagePromptTemplateLike)[]
