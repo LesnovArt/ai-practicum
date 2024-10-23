@@ -16,7 +16,12 @@
 
 // askWithTemplateAndContext(question, context);
 
-// TASK 2
-import { askWithTemplateAndContextAndHistory } from './scripts/index.js';
+// TASK 3
+// import { askWithTemplateAndContextAndHistory } from './scripts/index.js';
 
-askWithTemplateAndContextAndHistory();
+// askWithTemplateAndContextAndHistory();
+
+// TASK 4
+import { storeEmbeddings } from './scripts/index.js';
+
+storeEmbeddings();
