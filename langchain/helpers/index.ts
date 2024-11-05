@@ -6,3 +6,4 @@ export * from './directory-loader.js';
 export * from './create-chain-with-history.js';
 export * from './get-embedding-model.js';
 export * from './get-pinecone-index.js';
+export * from './generate-session-id.js';
