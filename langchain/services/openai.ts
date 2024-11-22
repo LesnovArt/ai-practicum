@@ -37,11 +37,11 @@ export class LangChainOpenAI {
       LangChainOpenAI.instance.setModel(props);
     }
 
-    console.log('/------------/ Current ChatOpenAIFields /------------/');
-    console.log(
-      `Current ChatOpenAIFields: ${JSON.stringify(LangChainOpenAI.instance.openAIFields)}`
-    );
-    console.log('/------------/ OLD INSTANCE ^^^ /------------/ ');
+    // console.log('/------------/ Current ChatOpenAIFields /------------/');
+    // console.log(
+    //   `Current ChatOpenAIFields: ${JSON.stringify(LangChainOpenAI.instance.openAIFields)}`
+    // );
+    // console.log('/------------/ OLD INSTANCE ^^^ /------------/ ');
     return LangChainOpenAI.instance;
   }
 
