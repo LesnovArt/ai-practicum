@@ -111,6 +111,7 @@ export class EmbeddingManager {
 
   async querySimilar(props: QueryByVectorValuesProps): QueryRequestResult {
     const {
+      namespaceName,
       indexName,
       vector,
       topK = 1,
@@ -121,14 +122,20 @@ export class EmbeddingManager {
     } = props;
 
     const index = this.pcone.Index(indexName);
-
-    return index.query({
+    const payload = {
       vector,
       topK,
       includeMetadata,
       includeValues,
       filter,
       sparseVector,
-    });
+    };
+
+    if (namespaceName) {
+      console.log('namespaceName', namespaceName);
+      return index.namespace(namespaceName).query(payload);
+    }
+
+    return index.query(payload);
   }
 }

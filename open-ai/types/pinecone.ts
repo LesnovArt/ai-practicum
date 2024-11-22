@@ -17,8 +17,14 @@ export type IndexNameType = {
   indexName: IndexName;
 };
 
-export type QueryByIdProps = QueryByRecordId & IndexNameType;
+export type IndexNameSpace = {
+  namespaceName?: IndexName;
+};
 
-export type QueryByVectorValuesProps = QueryByVectorValues & IndexNameType;
+export type QueryByIdProps = QueryByRecordId & IndexNameType & IndexNameSpace;
+
+export type QueryByVectorValuesProps = QueryByVectorValues &
+  IndexNameType &
+  IndexNameSpace;
 
 export type QueryRequestResult = Promise<QueryResponse<RecordMetadata>>;

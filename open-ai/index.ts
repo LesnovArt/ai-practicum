@@ -5,7 +5,8 @@
 // } from './simple-completions/index.js';
 
 import {
-  queryByVector,
+  queryByVectorWithFilter,
+  // queryByVector,
   // makeEmbedding,
   // makeIndex,
   // upsertEmbeddingsByNamespace,
@@ -78,24 +79,20 @@ console.log('Hello world from OpenAI course!');
 //       'Creation Index and Insert a vector from OPEN AI passed successfully'
 //     );
 //   })
-//   .catch((error) => {
-//     console.error(`Error occurs. Error ${error}`);
-//   });
 
 // Task 3
 // upsertEmbeddingsByNamespace()
 //   .then(() => {
 //     console.log('Data upsert completed successfully!');
 //   })
-//   .catch((error: unknown) => {
-//     console.error('Error upserting data:', error);
-//   });
 
 // Task 4
-queryByVector()
-  .then(() => {
-    console.log('Data queried successfully!');
-  })
-  .catch((error: unknown) => {
-    console.error('Error querying data:', error);
-  });
+// queryByVector()
+//   .then(() => {
+//     console.log('Data queried successfully!');
+//   })
+
+// Task 5
+queryByVectorWithFilter('workEnvironment').then(() => {
+  console.log('Data queried successfully!');
+});
