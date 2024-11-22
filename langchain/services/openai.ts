@@ -3,6 +3,7 @@ import { ChatOpenAI, ChatOpenAIFields, ClientOptions } from '@langchain/openai';
 export class LangChainOpenAI {
   private static instance: LangChainOpenAI;
   private openai: ChatOpenAI;
+  private openAIFields: ChatOpenAIFields;
 
   private constructor({
     apiKey = process.env.OPENAI_API_KEY,
@@ -11,6 +12,14 @@ export class LangChainOpenAI {
     maxTokens = 500,
     ...rest
   }: ChatOpenAIFields = {}) {
+    this.openAIFields = {
+      apiKey,
+      model,
+      temperature,
+      maxTokens,
+      ...rest,
+    };
+
     this.openai = new ChatOpenAI({
       apiKey,
       model,
@@ -24,10 +33,20 @@ export class LangChainOpenAI {
     if (!LangChainOpenAI.instance) {
       LangChainOpenAI.instance = new LangChainOpenAI(props);
     }
+    if (props) {
+      LangChainOpenAI.instance.setModel(props);
+    }
+
+    // console.log('/------------/ Current ChatOpenAIFields /------------/');
+    // console.log(
+    //   `Current ChatOpenAIFields: ${JSON.stringify(LangChainOpenAI.instance.openAIFields)}`
+    // );
+    // console.log('/------------/ OLD INSTANCE ^^^ /------------/ ');
     return LangChainOpenAI.instance;
   }
 
   setModel(fields: ChatOpenAIFields, configuration?: ClientOptions) {
+    this.openAIFields = fields;
     this.openai = new ChatOpenAI(fields, configuration);
   }
 
