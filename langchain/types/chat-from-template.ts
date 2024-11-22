@@ -1,1 +1,5 @@
-export type ChatFromTemplateList = 'postSurgeryRecoveryHealthAssistant';
+export type ChatFromTemplateList =
+  | 'postSurgeryRecoveryHealthAssistant'
+  | 'dedicatedHealthAssistantWithContext'
+  | 'dedicatedHealthAssistantWithContextAndHistory'
+  | 'dedicatedPersonalAssistantWithContextAndHistory';
