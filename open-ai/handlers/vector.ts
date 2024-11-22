@@ -1,6 +1,6 @@
-import { PineconeRecord, RecordMetadata } from '@pinecone-database/pinecone';
 import { EmbeddingManager } from '../service/index.js';
 import { errorHandler } from './error-handler.js';
+import { QueryByVectorValuesProps, UpsertProps } from '../types/index.js';
 
 export const createIndex = async (name: string) => {
   const embManager = EmbeddingManager.getInstance();
@@ -15,20 +15,25 @@ export const createIndex = async (name: string) => {
   }
 };
 
-export const insertVector = async ({
-  indexName,
-  upsertPayload,
-}: {
-  indexName: string;
-  upsertPayload: PineconeRecord<RecordMetadata>[];
-}) => {
+export const insertVector = async (props: UpsertProps) => {
   const embManager = EmbeddingManager.getInstance();
 
   try {
-    await embManager.upsertEmbedding({ indexName, upsertPayload });
+    await embManager.upsertEmbedding(props);
   } catch (error) {
     console.log('Error in insertVector');
 
+    errorHandler(error);
+  }
+};
+
+export const queryIndexByVector = async (props: QueryByVectorValuesProps) => {
+  const embManager = EmbeddingManager.getInstance();
+
+  try {
+    return embManager.querySimilar(props);
+  } catch (error) {
+    console.log('Error in queryIndexByVector');
     errorHandler(error);
   }
 };
