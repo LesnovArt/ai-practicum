@@ -29,6 +29,14 @@ export const FROM_MESSAGE_MAPPER = {
     new MessagesPlaceholder('history'),
     ['user', '{input}'],
   ],
+  dedicatedPersonalAssistantWithContextAndHistory: [
+    [
+      'system',
+      'You are a dedicated personal assistant tasked with providing tailored advice on different aspects of person life. Each response should be a direct recommendation that is relevant and specific to the provided context: {context}. Focus solely on delivering actionable advice without additional commentary.',
+    ],
+    new MessagesPlaceholder('history'),
+    ['user', '{input}'],
+  ],
 } as Record<
   ChatFromTemplateList,
   (ChatPromptTemplate<InputValues, string> | BaseMessagePromptTemplateLike)[]
