@@ -1,6 +1,8 @@
 // TASK 1
 // import { compareAskWithAndWithoutTemplates } from './scripts/index.js';
 
+import { makeEnhancedChat } from './multi-context-chat/index.js';
+
 // const question =
 // 'Can you suggest a set of exercises for someone with lower back pain?';
 
@@ -16,7 +18,39 @@
 
 // askWithTemplateAndContext(question, context);
 
-// TASK 2
-import { askWithTemplateAndContextAndHistory } from './scripts/index.js';
+// TASK 3
+// import { askWithTemplateAndContextAndHistory } from './scripts/index.js';
 
-askWithTemplateAndContextAndHistory();
+// askWithTemplateAndContextAndHistory();
+
+// TASK 4
+// import { storeEmbeddings } from './scripts/index.js';
+
+// storeEmbeddings();
+
+// TASK 5
+// import { makeRAGchat } from './lang-chain-chat/rag-chat.js';
+
+// makeRAGchat()
+//   .then((data?: { status: string }) => {
+//     if (data?.status === 'finish') {
+//       console.log('/ --- Chat was closed. --- /');
+//     }
+//   })
+//   .catch(() => {
+//     console.log('/ --- Error while chat processing --- /');
+//   });
+
+// TASK 6
+
+// store embeddings with metadata
+// storeEmbeddingsWithMultiContext();
+makeEnhancedChat()
+  .then((data?: { status: string }) => {
+    if (data?.status === 'finish') {
+      console.log('/ --- Chat was closed. --- /');
+    }
+  })
+  .catch((error) => {
+    console.log('/ --- Error while chat processing --- /', error);
+  });

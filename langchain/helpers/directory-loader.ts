@@ -13,9 +13,10 @@ const DATA_FOLDER = 'data';
 
 const DEFAULT_FILE_PATH = path.resolve(dirname, `../${DATA_FOLDER}`);
 
-export const loader = new DirectoryLoader(DEFAULT_FILE_PATH, {
-  '.json': (path) => new JSONLoader(path, '/texts'),
-  '.jsonl': (path) => new JSONLinesLoader(path, '/html'),
-  '.txt': (path) => new TextLoader(path),
-  '.csv': (path) => new CSVLoader(path, 'text'),
-});
+export const directoryLoader = (filePath = DEFAULT_FILE_PATH) =>
+  new DirectoryLoader(filePath, {
+    '.json': (path) => new JSONLoader(path, '/texts'),
+    '.jsonl': (path) => new JSONLinesLoader(path, '/html'),
+    '.txt': (path) => new TextLoader(path),
+    '.csv': (path) => new CSVLoader(path, 'text'),
+  });
