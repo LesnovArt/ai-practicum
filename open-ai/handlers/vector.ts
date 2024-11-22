@@ -1,6 +1,6 @@
 import { EmbeddingManager } from '../service/index.js';
 import { errorHandler } from './error-handler.js';
-import { UpsertProps } from '../types/index.js';
+import { QueryByVectorValuesProps, UpsertProps } from '../types/index.js';
 
 export const createIndex = async (name: string) => {
   const embManager = EmbeddingManager.getInstance();
@@ -23,6 +23,17 @@ export const insertVector = async (props: UpsertProps) => {
   } catch (error) {
     console.log('Error in insertVector');
 
+    errorHandler(error);
+  }
+};
+
+export const queryIndexByVector = async (props: QueryByVectorValuesProps) => {
+  const embManager = EmbeddingManager.getInstance();
+
+  try {
+    return embManager.querySimilar(props);
+  } catch (error) {
+    console.log('Error in queryIndexByVector');
     errorHandler(error);
   }
 };
