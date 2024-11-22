@@ -13,7 +13,7 @@ export const startComplexChat = async (chatOptions = initialOptions) => {
   console.log(`To stop it, please enter 'exit' through 'Enter your message:'`);
 
   const inputOutput = new ReadlineInterface(chatOptions);
-  const chat = new ExtendedChatBot(inputOutput);
+  const chat = new ExtendedChatBot({ inputOutput, maxTokensAllowed: 300 });
 
   chat.on('onAsk', handleAsk(chat));
   chat.on('onAISent', handleAiSent);

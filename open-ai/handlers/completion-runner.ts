@@ -35,17 +35,17 @@ export const runCompletion = async ({
   // TODO add log levels and leave it for debug mode
   // console.log('--/-- Start Prompt execution... --/--');
 
-  const response = await AI.createChatCompletion({
-    messages,
-    temperature,
-    top_p,
-    max_tokens,
-    n,
-    frequency_penalty,
-    seed,
-  });
-
   try {
+    const response = await AI.createChatCompletion({
+      messages,
+      temperature,
+      top_p,
+      max_tokens,
+      n,
+      frequency_penalty,
+      seed,
+    });
+
     if (!response) {
       throw { status: 'failed', message: 'No response' };
     }

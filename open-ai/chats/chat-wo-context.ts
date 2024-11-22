@@ -17,7 +17,7 @@ export const makeChatWithOutContext = async (
   chatOptions: ReadLineOptions = initialOptions
 ) => {
   const inputOutput = new ReadlineInterface(chatOptions);
-  const chat = new ChatBot(inputOutput);
+  const chat = new ChatBot({ inputOutput });
 
   try {
     const passedQuestion = await chat.askQuestion('Ask question: ');
