@@ -1,16 +1,9 @@
 import { OpenAIClient } from '../service/index.js';
-import {
-  CreateChatCompletionProps,
-  ResultCompletionMsg,
-} from '../types/index.js';
+import { CompletionsRunnerProps } from '../types/handlers.js';
+import { ResultCompletionMsg } from '../types/index.js';
 import { errorHandler } from './error-handler.js';
 
 const AI = OpenAIClient.getInstance();
-
-export type CompletionsRunnerProps = CreateChatCompletionProps & {
-  onSuccess?: (response: ResultCompletionMsg) => void | ResultCompletionMsg;
-  onFailure?: (error: string) => string | void;
-};
 
 export const runCompletion = async ({
   messages,
@@ -38,22 +31,21 @@ export const runCompletion = async ({
    * stands to keep results equal
    */
   seed,
-  onSuccess,
-  onFailure,
 }: CompletionsRunnerProps): Promise<ResultCompletionMsg | undefined> => {
-  console.log('--/-- Start Prompt execution... --/--');
-
-  const response = await AI.createChatCompletion({
-    messages,
-    temperature,
-    top_p,
-    max_tokens,
-    n,
-    frequency_penalty,
-    seed,
-  });
+  // TODO add log levels and leave it for debug mode
+  // console.log('--/-- Start Prompt execution... --/--');
 
   try {
+    const response = await AI.createChatCompletion({
+      messages,
+      temperature,
+      top_p,
+      max_tokens,
+      n,
+      frequency_penalty,
+      seed,
+    });
+
     if (!response) {
       throw { status: 'failed', message: 'No response' };
     }
@@ -65,13 +57,11 @@ export const runCompletion = async ({
       };
     }
 
-    console.log(response);
-    onSuccess?.(response);
-
     return response;
   } catch (error: unknown) {
-    errorHandler(error, onFailure);
+    errorHandler(error);
   } finally {
-    console.log('--/--Prompt finished execution --/--');
+    // TODO add log levels and leave it for debug mode
+    // console.log('--/--Prompt finished execution --/--');
   }
 };
